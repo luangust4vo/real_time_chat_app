@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/scaffold.dart';
+import 'package:real_time_chat_app/core/widgets/custom_scaffold.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});

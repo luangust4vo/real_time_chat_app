@@ -23,10 +23,10 @@ class App extends StatelessWidget {
                 themeProvider.isDarkMode ? Brightness.dark : Brightness.light,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.chat,
+          initialRoute: Routes.chat_list,
           routes: {
             Routes.chat: (context) => const Chat(),
-            Routes.chat_list: (context) => const ChatList(),
+            Routes.chat_list: (context) => ChatList(),
             Routes.login: (context) => const Login(),
             Routes.register: (context) => const Register(),
             Routes.settings: (context) => const Settings(),
