@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real_time_chat_app/app/routes.dart';
+import 'package:real_time_chat_app/features/welcome.dart';
 import 'package:real_time_chat_app/features/chat/screens/chat.dart';
 import 'package:real_time_chat_app/features/auth/screens/login.dart';
 import 'package:real_time_chat_app/features/auth/screens/register.dart';
@@ -23,8 +24,9 @@ class App extends StatelessWidget {
                 themeProvider.isDarkMode ? Brightness.dark : Brightness.light,
           ),
           debugShowCheckedModeBanner: false,
-          initialRoute: Routes.chat_list,
+          initialRoute: Routes.home,
           routes: {
+            Routes.home: (context) => const Welcome(),
             Routes.chat: (context) => const Chat(),
             Routes.chat_list: (context) => ChatList(),
             Routes.login: (context) => const Login(),
