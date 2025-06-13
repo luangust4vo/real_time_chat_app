@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/custom_scaffold.dart';
-import 'package:real_time_chat_app/features/auth/widgets/custom_form.dart';
+import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
+import 'package:real_time_chat_app/features/auth/widgets/auth_form.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -12,8 +12,7 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return GenericScaffold(
         title: 'Register', body: CustomForm(formType: FormType.register));
-    ;
   }
 }

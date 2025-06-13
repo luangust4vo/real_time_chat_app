@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CustomScaffold extends StatelessWidget {
+class GenericScaffold extends StatelessWidget {
   final String title;
   final String? subtitle;
   final Widget? leading;
   final Widget body;
   final List<Widget>? actions;
 
-  const CustomScaffold({
+  const GenericScaffold({
     super.key,
     this.leading,
     required this.title,

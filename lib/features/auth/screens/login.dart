@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/custom_scaffold.dart';
-import 'package:real_time_chat_app/features/auth/widgets/custom_form.dart';
+import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
+import 'package:real_time_chat_app/features/auth/widgets/auth_form.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -12,7 +12,7 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return GenericScaffold(
         title: 'Login', body: CustomForm(formType: FormType.login));
   }
 }

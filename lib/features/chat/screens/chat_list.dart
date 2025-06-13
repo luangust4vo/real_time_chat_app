@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/custom_scaffold.dart';
+import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
 import 'package:real_time_chat_app/core/widgets/user_listview.dart';
 import 'package:real_time_chat_app/model/user.dart';
 
@@ -30,7 +30,7 @@ class ChatList extends StatefulWidget {
 class _ChatListState extends State<ChatList> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return GenericScaffold(
       title: 'Chat List',
       body: Center(
         child: UserListView(
@@ -38,6 +38,5 @@ class _ChatListState extends State<ChatList> {
         ),
       ),
     );
-    ;
   }
 }

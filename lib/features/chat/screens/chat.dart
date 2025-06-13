@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/custom_scaffold.dart';
+import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
 
 class Chat extends StatefulWidget {
   const Chat({super.key});
@@ -11,7 +11,7 @@ class Chat extends StatefulWidget {
 class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
-    return CustomScaffold(
+    return GenericScaffold(
       title: 'Chat',
       body: Center(
         child: Text('Chat Screen',
