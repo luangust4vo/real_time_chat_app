@@ -4,25 +4,31 @@ import 'package:real_time_chat_app/features/auth/widgets/components/input_passwo
 
 enum FormType { login, register }
 
-class CustomForm extends StatefulWidget {
+class AuthForm extends StatefulWidget {
   final FormType formType;
+  final GlobalKey<FormState> formKey;
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+  final TextEditingController? nameController;
+  final TextEditingController? confirmPasswordController;
+  final TextEditingController? dateOfBirthController;
 
-  const CustomForm({super.key, required this.formType});
+  const AuthForm({
+    super.key,
+    required this.formType,
+    required this.formKey,
+    required this.emailController,
+    required this.passwordController,
+    this.nameController,
+    this.confirmPasswordController,
+    this.dateOfBirthController,
+  });
 
   @override
-  State<CustomForm> createState() => _CustomFormState();
+  State<AuthForm> createState() => _AuthFormState();
 }
 
-class _CustomFormState extends State<CustomForm> {
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-      TextEditingController();
-  final TextEditingController _dateOfBirthController = TextEditingController();
-
-  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-
+class _AuthFormState extends State<AuthForm> {
   DateTime? selectedDate;
 
   @override
@@ -30,13 +36,13 @@ class _CustomFormState extends State<CustomForm> {
     return Padding(
       padding: EdgeInsets.all(16.0),
       child: Form(
-        key: _globalKey,
+        key: widget.formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             if (widget.formType == FormType.register) ...[
               TextFormField(
-                controller: _nameController,
+                controller: widget.nameController!,
                 decoration: InputDecoration(
                     labelText: 'Nome', border: OutlineInputBorder()),
                 validator: (value) {
@@ -51,7 +57,7 @@ class _CustomFormState extends State<CustomForm> {
             ],
             if (widget.formType == FormType.register) ...[
               TextFormField(
-                controller: _dateOfBirthController,
+                controller: widget.dateOfBirthController!,
                 // onTap: () => _selectDate(context),
                 decoration: InputDecoration(
                     labelText: 'Data de Nascimento',
@@ -66,17 +72,17 @@ class _CustomFormState extends State<CustomForm> {
               ),
               const SizedBox(height: 16)
             ],
-            InputEmail(controller: _emailController),
+            InputEmail(controller: widget.emailController),
             const SizedBox(height: 16),
             InputPassword(
-                controller: _passwordController,
+                controller: widget.passwordController,
                 label: 'Insira sua senha',
                 hint: 'joao123',
                 errorMsg: 'O campo senha não pode ser vazio'),
             if (widget.formType == FormType.register) ...[
               const SizedBox(height: 16),
               InputPassword(
-                  controller: _confirmPasswordController,
+                  controller: widget.confirmPasswordController!,
                   label: 'Confirme sua senha',
                   hint: 'joao123',
                   errorMsg: 'As senhas não coincidem')

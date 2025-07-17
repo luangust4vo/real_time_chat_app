@@ -1,18 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
+import 'package:real_time_chat_app/app/routes.dart';
+import 'package:real_time_chat_app/features/auth/widgets/auth_scaffold.dart';
 import 'package:real_time_chat_app/features/auth/widgets/auth_form.dart';
+import 'package:real_time_chat_app/features/auth/widgets/auth_wrapper.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class Login extends StatelessWidget {
+  Login({super.key});
 
-  @override
-  State<Login> createState() => _LoginState();
-}
+  final _formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+  final _passwordController = TextEditingController();
 
-class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
-    return GenericScaffold(
-        title: 'Login', body: CustomForm(formType: FormType.login));
+    return AuthScaffold(
+        body: AuthWrapper(
+            title: 'Acesse sua conta',
+            buttonText: 'Entrar',
+            linkText: 'Não tem uma conta? Então cadastre',
+            onSubmit: () => print('teste'),
+            onLinkTap: () {
+              Navigator.of(context).pushNamed(Routes.register);
+            },
+            form: AuthForm(
+              formType: FormType.login,
+              formKey: _formKey,
+              emailController: _emailController,
+              passwordController: _passwordController,
+            )));
   }
 }

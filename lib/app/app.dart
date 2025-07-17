@@ -29,8 +29,8 @@ class App extends StatelessWidget {
             Routes.home: (context) => const Welcome(),
             Routes.chat: (context) => const Chat(),
             Routes.chat_list: (context) => ChatList(),
-            Routes.login: (context) => const Login(),
-            Routes.register: (context) => const Register(),
+            Routes.login: (context) => Login(),
+            Routes.register: (context) => Register(),
             Routes.settings: (context) => const Settings(),
           },
         );
