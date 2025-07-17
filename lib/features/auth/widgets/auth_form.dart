@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:real_time_chat_app/features/auth/widgets/components/input_email.dart';
 import 'package:real_time_chat_app/features/auth/widgets/components/input_password.dart';
 
