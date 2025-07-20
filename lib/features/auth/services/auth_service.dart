@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:real_time_chat_app/utils/snackbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthService {
@@ -20,31 +21,19 @@ class AuthService {
       );
 
       if (res.user != null && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text(
-                'Registro realizado! Verifique seu e-mail para confirmar a conta.'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        showSnackbar(context,
+            'Registro realizado! Verifique seu e-mail para confirmar a conta.',
+            type: SnackbarType.success);
       }
     } on AuthException catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro no registro: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Erro no registro: ${e.message}',
+            type: SnackbarType.error);
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ocorreu um erro inesperado. Tente novamente.'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Ocorreu um erro inesperado. Tente novamente.',
+            type: SnackbarType.error);
       }
     }
   }
@@ -61,30 +50,18 @@ class AuthService {
       );
 
       if (res.user != null && context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Login bem-sucedido!'),
-            backgroundColor: Colors.green,
-          ),
-        );
+        showSnackbar(context, 'Login bem-sucedido!',
+            type: SnackbarType.success);
       }
     } on AuthException catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro no login: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Erro no login: ${e.message}',
+            type: SnackbarType.error);
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ocorreu um erro inesperado. Tente novamente.'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Ocorreu um erro inesperado. Tente novamente.',
+            type: SnackbarType.error);
       }
     }
   }
@@ -94,21 +71,13 @@ class AuthService {
       await _supabase.auth.signOut();
     } on AuthException catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('Erro ao fazer logout: ${e.message}'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Erro ao fazer logout: ${e.message}',
+            type: SnackbarType.error);
       }
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Ocorreu um erro inesperado.'),
-            backgroundColor: Colors.red,
-          ),
-        );
+        showSnackbar(context, 'Ocorreu um erro inesperado. Tente novamente.',
+            type: SnackbarType.error);
       }
     }
   }
