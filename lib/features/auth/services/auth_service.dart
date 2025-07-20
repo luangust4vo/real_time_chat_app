@@ -88,4 +88,28 @@ class AuthService {
       }
     }
   }
+
+  Future<void> signOut(BuildContext context) async {
+    try {
+      await _supabase.auth.signOut();
+    } on AuthException catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Erro ao fazer logout: ${e.message}'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Ocorreu um erro inesperado.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
 }
