@@ -32,6 +32,22 @@ class AuthForm extends StatefulWidget {
 class _AuthFormState extends State<AuthForm> {
   DateTime? selectedDate;
 
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: selectedDate ?? DateTime.now(),
+      firstDate: DateTime(1900),
+      lastDate: DateTime.now(),
+    );
+    if (picked != null && picked != selectedDate) {
+      setState(() {
+        selectedDate = picked;
+        widget.dateOfBirthController!.text =
+            DateFormat('dd/MM/yyyy').format(picked);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -58,8 +74,9 @@ class _AuthFormState extends State<AuthForm> {
             ],
             if (widget.formType == FormType.register) ...[
               TextFormField(
+                readOnly: true, // Para evitar que insira a data na mão
                 controller: widget.dateOfBirthController!,
-                // onTap: () => _selectDate(context),
+                onTap: () => _selectDate(context),
                 decoration: InputDecoration(
                     labelText: 'Data de Nascimento',
                     border: OutlineInputBorder()),
@@ -86,7 +103,17 @@ class _AuthFormState extends State<AuthForm> {
                   controller: widget.confirmPasswordController!,
                   label: 'Confirme sua senha',
                   hint: 'joao123',
-                  errorMsg: 'As senhas não coincidem')
+                  errorMsg: 'As senhas não coincidem',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Confirme sua senha';
+                    }
+                    // Compara o valor deste campo com o valor do campo de senha original
+                    if (value != widget.passwordController.text) {
+                      return 'As senhas não coincidem';
+                    }
+                    return null;
+                  }),
             ]
           ],
         ),

@@ -8,6 +8,7 @@ class AuthWrapper extends StatelessWidget {
   final VoidCallback onSubmit;
   final VoidCallback onLinkTap;
   final AuthForm form;
+  final bool isLoading;
 
   const AuthWrapper({
     super.key,
@@ -17,6 +18,7 @@ class AuthWrapper extends StatelessWidget {
     required this.onSubmit,
     required this.onLinkTap,
     required this.form,
+    required this.isLoading,
   });
 
   @override
@@ -34,6 +36,18 @@ class AuthWrapper extends StatelessWidget {
             const SizedBox(height: 32),
             form,
             const SizedBox(height: 24),
+            if (isLoading)
+              const Center(
+                child: CircularProgressIndicator(),
+              )
+            else
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: onSubmit,
+                  child: Text(buttonText),
+                ),
+              ),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
