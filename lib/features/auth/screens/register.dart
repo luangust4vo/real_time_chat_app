@@ -50,6 +50,7 @@ class _RegisterState extends State<Register> {
 
     if (mounted) {
       setState(() => _isLoading = false);
+      Navigator.of(context).pushReplacementNamed(Routes.chat_list);
     }
   }
 

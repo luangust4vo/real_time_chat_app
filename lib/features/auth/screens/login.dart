@@ -42,6 +42,7 @@ class _LoginState extends State<Login> {
 
     if (mounted) {
       setState(() => _isLoading = false);
+      Navigator.of(context).pushReplacementNamed(Routes.chat_list);
     }
   }
 

@@ -14,9 +14,17 @@ class UserListView extends StatelessWidget {
         final user = items[index];
 
         return ListTile(
-          leading: CircleAvatar(backgroundImage: NetworkImage(user.photoPath!)),
+          leading: CircleAvatar(
+            backgroundImage: user.photoPath != null
+                ? NetworkImage(user.photoPath!)
+                : NetworkImage("https://avatars.githubusercontent.com/u/1"),
+          ),
           title: Text(user.name),
-          subtitle: Text(user.status! ? 'Online' : 'Offline'),
+          subtitle: Text(
+            user.status != null
+                ? (user.status! ? 'Online' : 'Offline')
+                : 'Status desconhecido',
+          ),
         );
       },
     );

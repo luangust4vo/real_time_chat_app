@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:real_time_chat_app/utils/snackbar.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -13,11 +14,15 @@ class AuthService {
     required String dateOfBirth,
   }) async {
     try {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(
+  DateFormat('dd/MM/yyyy').parse(dateOfBirth.trim())
+);
+
       final AuthResponse res = await _supabase.auth.signUp(
-        email: email,
-        password: password,
+        email: email.trim(),
+        password: password.trim(),
         // 'data' permite salvar informações adicionais no perfil do usuário
-        data: {'name': name, 'date_of_birth': dateOfBirth},
+        data: {'name': name.trim(), 'date_of_birth': formattedDate},
       );
 
       if (res.user != null && context.mounted) {
@@ -27,7 +32,7 @@ class AuthService {
       }
     } on AuthException catch (e) {
       if (context.mounted) {
-        showSnackbar(context, 'Erro no registro: ${e.message}',
+        showSnackbar(context, 'Erro no registro: ${e.toString()}',
             type: SnackbarType.error);
       }
     } catch (e) {

@@ -18,12 +18,12 @@ class _ChatListState extends State<ChatList> {
         id: '1',
         name: 'Luan Gustavo',
         photoPath:
-            'https://s2-valor.glbimg.com/dHPkcTVDv02aI9Dv6WSJ38oPZTE=/0x0:1200x780/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/9/O/5B4l1nTHipO9SlA2fS2g/dwayne-johnson-2014-cropped-.jpg'),
+            'https://avatars.githubusercontent.com/u/1'),
     User(
         id: '2',
         name: 'The Rock',
         photoPath:
-            'https://s2-valor.glbimg.com/dHPkcTVDv02aI9Dv6WSJ38oPZTE=/0x0:1200x780/888x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_63b422c2caee4269b8b34177e8876b93/internal_photos/bs/2024/9/O/5B4l1nTHipO9SlA2fS2g/dwayne-johnson-2014-cropped-.jpg')
+            'https://avatars.githubusercontent.com/u/1')
   ];
 
   final authService = AuthService();

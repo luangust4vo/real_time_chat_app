@@ -48,13 +48,6 @@ class AuthWrapper extends StatelessWidget {
                   child: Text(buttonText),
                 ),
               ),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                onPressed: onSubmit,
-                child: Text(buttonText),
-              ),
-            ),
             const SizedBox(height: 16),
             GestureDetector(
               onTap: onLinkTap,

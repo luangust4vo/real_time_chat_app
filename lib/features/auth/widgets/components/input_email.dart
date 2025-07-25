@@ -19,8 +19,11 @@ class InputEmail extends StatelessWidget {
     if ((value == null || value.isEmpty) && isRequired) {
       return 'Informe o e-mail';
     } else {
-      final regex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
-      if (regex.hasMatch(value!)) return 'Informe um e-mail válido';
+      final regex = RegExp(
+        r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$"
+      );
+
+      if (!regex.hasMatch(value!)) return 'Informe um e-mail válido';
     }
 
     return null;
