@@ -40,7 +40,7 @@ class _RegisterState extends State<Register> {
 
     setState(() => _isLoading = true);
 
-    await _authService.signUp(
+    final bool success = await _authService.signUp(
       context: context,
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
@@ -50,7 +50,10 @@ class _RegisterState extends State<Register> {
 
     if (mounted) {
       setState(() => _isLoading = false);
-      Navigator.of(context).pushReplacementNamed(Routes.chat_list);
+
+      if (success) {
+        Navigator.of(context).pushReplacementNamed(Routes.chat_list);
+      }
     }
   }
 

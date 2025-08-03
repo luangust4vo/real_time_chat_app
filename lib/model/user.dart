@@ -14,9 +14,9 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['id'],
-      name: map['name'] ?? 'Nome Indisponível',
-      photoPath: map['photo_url'],
+      id: map['user_id'],
+      name: map['user_name'] ?? 'Nome Indisponível',
+      photoPath: map['user_photo_url'],
       status: map['status'] ?? false,
     );
   }

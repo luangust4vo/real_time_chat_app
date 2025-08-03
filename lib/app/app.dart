@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real_time_chat_app/app/routes.dart';
+import 'package:real_time_chat_app/features/search/screens/search_users.dart';
 import 'package:real_time_chat_app/features/welcome.dart';
 import 'package:real_time_chat_app/features/chat/screens/chat.dart';
 import 'package:real_time_chat_app/features/auth/screens/login.dart';
 import 'package:real_time_chat_app/features/auth/screens/register.dart';
 import 'package:real_time_chat_app/features/chat/screens/chat_list.dart';
 import 'package:real_time_chat_app/features/settings/screens/settings.dart';
+import 'package:real_time_chat_app/features/notifications/screens/notifications.dart';
 import 'package:real_time_chat_app/providers/theme_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -47,6 +49,8 @@ class App extends StatelessWidget {
                   Routes.login: (context) => Login(),
                   Routes.register: (context) => Register(),
                   Routes.settings: (context) => const Settings(),
+                  Routes.search_users: (context) => const SearchUsers(),
+                  Routes.notifications: (context) => const Notifications(),
                 },
               );
             });

@@ -15,15 +15,29 @@ class UserListView extends StatelessWidget {
 
         return ListTile(
           leading: CircleAvatar(
-            backgroundImage: user.photoPath != null
-                ? NetworkImage(user.photoPath!)
-                : NetworkImage("https://avatars.githubusercontent.com/u/1"),
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            backgroundImage:
+                user.photoPath != null ? NetworkImage(user.photoPath!) : null,
+            child: user.photoPath == null
+                ? Text(
+                    user.name.isNotEmpty ? user.name[0].toUpperCase() : '?',
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                : null,
           ),
           title: Text(user.name),
           subtitle: Text(
             user.status != null
                 ? (user.status! ? 'Online' : 'Offline')
                 : 'Status desconhecido',
+          ),
+          onTap: () => Navigator.pushNamed(
+            context,
+            '/chat',
+            arguments: user,
           ),
         );
       },

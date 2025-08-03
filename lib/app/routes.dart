@@ -5,4 +5,6 @@ class Routes {
   static const login = '/login';
   static const register = '/register';
   static const settings = '/settings';
+  static const search_users = '/search_users';
+  static const notifications = '/notifications';
 }

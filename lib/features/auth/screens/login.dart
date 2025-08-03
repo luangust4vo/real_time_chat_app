@@ -34,7 +34,7 @@ class _LoginState extends State<Login> {
 
     setState(() => _isLoading = true);
 
-    await _authService.signIn(
+    final bool success = await _authService.signIn(
       context: context,
       email: _emailController.text.trim(),
       password: _passwordController.text.trim(),
@@ -42,7 +42,10 @@ class _LoginState extends State<Login> {
 
     if (mounted) {
       setState(() => _isLoading = false);
-      Navigator.of(context).pushReplacementNamed(Routes.chat_list);
+
+      if (success) {
+        Navigator.of(context).pushReplacementNamed(Routes.chat_list);
+      }
     }
   }
 

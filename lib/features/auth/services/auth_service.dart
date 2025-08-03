@@ -6,7 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthService {
   final _supabase = Supabase.instance.client;
 
-  Future<void> signUp({
+  Future<bool> signUp({
     required BuildContext context,
     required String email,
     required String password,
@@ -14,14 +14,12 @@ class AuthService {
     required String dateOfBirth,
   }) async {
     try {
-      String formattedDate = DateFormat('yyyy-MM-dd').format(
-  DateFormat('dd/MM/yyyy').parse(dateOfBirth.trim())
-);
+      String formattedDate = DateFormat('yyyy-MM-dd')
+          .format(DateFormat('dd/MM/yyyy').parse(dateOfBirth.trim()));
 
       final AuthResponse res = await _supabase.auth.signUp(
         email: email.trim(),
         password: password.trim(),
-        // 'data' permite salvar informações adicionais no perfil do usuário
         data: {'name': name.trim(), 'date_of_birth': formattedDate},
       );
 
@@ -30,20 +28,26 @@ class AuthService {
             'Registro realizado! Verifique seu e-mail para confirmar a conta.',
             type: SnackbarType.success);
       }
+
+      return true;
     } on AuthException catch (e) {
       if (context.mounted) {
         showSnackbar(context, 'Erro no registro: ${e.toString()}',
             type: SnackbarType.error);
       }
+
+      return false;
     } catch (e) {
       if (context.mounted) {
         showSnackbar(context, 'Ocorreu um erro inesperado. Tente novamente.',
             type: SnackbarType.error);
       }
+
+      return false;
     }
   }
 
-  Future<void> signIn({
+  Future<bool> signIn({
     required BuildContext context,
     required String email,
     required String password,
@@ -58,16 +62,22 @@ class AuthService {
         showSnackbar(context, 'Login bem-sucedido!',
             type: SnackbarType.success);
       }
+
+      return true;
     } on AuthException catch (e) {
       if (context.mounted) {
         showSnackbar(context, 'Erro no login: ${e.message}',
             type: SnackbarType.error);
       }
+
+      return false;
     } catch (e) {
       if (context.mounted) {
         showSnackbar(context, 'Ocorreu um erro inesperado. Tente novamente.',
             type: SnackbarType.error);
       }
+
+      return false;
     }
   }
 
