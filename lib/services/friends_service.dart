@@ -85,17 +85,21 @@ class FriendsService {
         });
   }
 
-  Stream<List<User>> getFriendsStream() {
-    return _supabase.from('friendships').stream(primaryKey: ['id']).map((_) {
-      return _supabase.rpc('get_friends');
-    }).asyncMap((future) async {
-      final friendsData = await future;
+  Stream<List<Map<String, dynamic>>> getFriendsStream() {
+    return _supabase
+        .from('messages')
+        .stream(primaryKey: ['id']).asyncMap((_) async {
+      final conversationsData = await _supabase.rpc('get_conversations');
 
-      final friendsList = (friendsData as List)
-          .map((friendMap) => User.fromMap(friendMap))
-          .toList();
+      final conversationsList =
+          (conversationsData as List).map((conversationMap) {
+        return {
+          'user': User.fromMap(conversationMap),
+          'friendship_id': conversationMap['friendship_id'],
+        };
+      }).toList();
 
-      return friendsList;
+      return conversationsList;
     });
   }
 }

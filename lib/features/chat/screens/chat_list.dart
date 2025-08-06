@@ -80,7 +80,7 @@ class _ChatListState extends State<ChatList> {
           ],
         ),
       ],
-      body: StreamBuilder<List<User>>(
+      body: StreamBuilder<List<Map<String, dynamic>>>(
         stream: _friendsService.getFriendsStream(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -90,9 +90,9 @@ class _ChatListState extends State<ChatList> {
             return Center(child: Text('Ocorreu um erro: ${snapshot.error}'));
           }
 
-          final friends = snapshot.data ?? [];
+          final conversations = snapshot.data ?? [];
 
-          if (friends.isEmpty) {
+          if (conversations.isEmpty) {
             return const Center(
               child: Padding(
                 padding: EdgeInsets.all(24.0),
@@ -105,7 +105,13 @@ class _ChatListState extends State<ChatList> {
             );
           }
 
-          return UserListView(items: friends);
+          final List<User> friendUsers =
+              conversations.map((data) => data['user'] as User).toList();
+
+          return UserListView(
+            items: friendUsers,
+            fullData: conversations,
+          );
         },
       ),
     );
