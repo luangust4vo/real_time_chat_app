@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:real_time_chat_app/features/chat/widgets/message_bubble.dart';
 import 'package:real_time_chat_app/core/widgets/generic_scaffold.dart';
 import 'package:real_time_chat_app/model/user.dart';
@@ -68,6 +69,17 @@ class _ChatState extends State<Chat> {
                   return const Center(child: CircularProgressIndicator());
                 }
                 final messages = snapshot.data ?? [];
+
+                final hasUnreadMessages = messages.any((msg) =>
+                    msg['is_read'] == false &&
+                    msg['sender_id'] != currentUserId);
+
+                if (hasUnreadMessages) {
+                  SchedulerBinding.instance.addPostFrameCallback((_) {
+                    _chatService.markMessagesAsRead(_friendshipId);
+                  });
+                }
+
                 return ListView.builder(
                   padding: const EdgeInsets.all(12),
                   reverse: true,
