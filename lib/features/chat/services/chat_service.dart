@@ -3,17 +3,13 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class ChatService {
   final _supabase = Supabase.instance.client;
 
-  Future<List<Map<String, dynamic>>> getMessages(int friendshipId) async {
-    try {
-      final response = await _supabase
-          .from('messages')
-          .select()
-          .eq('friendship_id', friendshipId)
-          .order('created_at', ascending: false); // As mais recentes primeiro
-      return response;
-    } catch (e) {
-      return [];
-    }
+  Stream<List<Map<String, dynamic>>> getMessagesStream(int friendshipId) {
+    return _supabase
+        .from('messages')
+        .stream(primaryKey: ['id'])
+        .eq('friendship_id', friendshipId)
+        .order('created_at', ascending: false)
+        .map((data) => data);
   }
 
   Future<void> sendMessage({

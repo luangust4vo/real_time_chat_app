@@ -18,7 +18,7 @@ class _ChatState extends State<Chat> {
 
   late final User _friend;
   late final int _friendshipId;
-  late Future<List<Map<String, dynamic>>> _messagesFuture;
+  late final Stream<List<Map<String, dynamic>>> _messagesStream;
   bool _isInitialized = false;
 
   @override
@@ -30,7 +30,7 @@ class _ChatState extends State<Chat> {
       _friend = arguments['user'] as User;
       _friendshipId = arguments['friendship_id'] as int;
 
-      _messagesFuture = _chatService.getMessages(_friendshipId);
+      _messagesStream = _chatService.getMessagesStream(_friendshipId);
       _chatService.markMessagesAsRead(_friendshipId);
 
       _isInitialized = true;
@@ -43,20 +43,13 @@ class _ChatState extends State<Chat> {
     super.dispose();
   }
 
-  Future<void> _sendMessage() async {
+  void _sendMessage() {
     if (_messageController.text.trim().isEmpty) return;
-
-    final content = _messageController.text.trim();
-    _messageController.clear();
-
-    await _chatService.sendMessage(
+    _chatService.sendMessage(
       friendshipId: _friendshipId,
-      content: content,
+      content: _messageController.text.trim(),
     );
-
-    setState(() {
-      _messagesFuture = _chatService.getMessages(_friendshipId);
-    });
+    _messageController.clear();
   }
 
   @override
@@ -68,8 +61,8 @@ class _ChatState extends State<Chat> {
       body: Column(
         children: [
           Expanded(
-            child: FutureBuilder<List<Map<String, dynamic>>>(
-              future: _messagesFuture,
+            child: StreamBuilder<List<Map<String, dynamic>>>(
+              stream: _messagesStream,
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
