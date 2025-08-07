@@ -53,6 +53,13 @@ class _ChatListState extends State<ChatList> {
             );
           },
         ),
+        IconButton(
+          icon: const Icon(Icons.dashboard_outlined),
+          onPressed: () {
+            Navigator.of(context).pushNamed(Routes.dashboard);
+          },
+          tooltip: 'Dashboard',
+        ),
         PopupMenuButton<String>(
           icon: const Icon(Icons.more_vert),
           onSelected: (value) {

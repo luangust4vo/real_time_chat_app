@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:real_time_chat_app/app/routes.dart';
+import 'package:real_time_chat_app/features/dashboard/screens/dashboard.dart';
 import 'package:real_time_chat_app/features/search/screens/search_users.dart';
 import 'package:real_time_chat_app/features/welcome.dart';
 import 'package:real_time_chat_app/features/chat/screens/chat.dart';
@@ -54,6 +55,7 @@ class App extends StatelessWidget {
                   Routes.settings: (context) => const Settings(),
                   Routes.search_users: (context) => const SearchUsers(),
                   Routes.notifications: (context) => const Notifications(),
+                  Routes.dashboard: (context) => const Dashboard(),
                 },
               );
             });

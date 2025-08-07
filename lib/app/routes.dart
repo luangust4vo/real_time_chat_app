@@ -7,4 +7,5 @@ class Routes {
   static const settings = '/settings';
   static const search_users = '/search_users';
   static const notifications = '/notifications';
+  static const dashboard = '/dashboard';
 }
