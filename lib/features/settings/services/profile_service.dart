@@ -1,7 +1,7 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ProfileService {
   final _supabase = Supabase.instance.client;
@@ -19,7 +19,9 @@ class ProfileService {
       final currentUser = _supabase.auth.currentUser;
       if (currentUser == null) return;
 
-      final fileExtension = imageFile.path.split('.').last.toLowerCase();
+      final fileName = imageFile.name;
+      final fileExtension =
+          fileName.contains('.') ? fileName.split('.').last : 'png';
       final filePath = '${currentUser.id}/avatar.$fileExtension';
 
       if (kIsWeb) {
