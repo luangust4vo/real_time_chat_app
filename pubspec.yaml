@@ -36,6 +36,8 @@ dependencies:
   flutter_dotenv:
   intl:
   dwds: ^24.4.1
+  shared_preferences: ^2.2.3
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

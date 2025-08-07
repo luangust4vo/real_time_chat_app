@@ -36,11 +36,14 @@ class App extends StatelessWidget {
               return MaterialApp(
                 title: 'Real Time Chat App',
                 theme: ThemeData(
-                  primaryColor: Colors.blueGrey,
-                  brightness: themeProvider.isDarkMode
-                      ? Brightness.dark
-                      : Brightness.light,
+                  brightness: Brightness.light,
+                  colorSchemeSeed: Colors.blue,
                 ),
+                darkTheme: ThemeData(
+                  brightness: Brightness.dark,
+                  colorSchemeSeed: Colors.blue,
+                ),
+                themeMode: themeProvider.themeMode,
                 debugShowCheckedModeBanner: false,
                 home: hasUser ? ChatList() : const Welcome(),
                 routes: {
