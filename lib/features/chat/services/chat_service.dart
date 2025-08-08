@@ -35,4 +35,21 @@ class ChatService {
         .eq('friendship_id', friendshipId)
         .neq('sender_id', currentUserId);
   }
+
+  Future<List<Map<String, dynamic>>> searchMessages({
+    required int friendshipId,
+    required String searchTerm,
+  }) async {
+    try {
+      final response =
+          await _supabase.rpc('search_messages_in_conversation', params: {
+        'p_friendship_id': friendshipId,
+        'p_search_term': searchTerm,
+      });
+      return (response as List).cast<Map<String, dynamic>>();
+    } catch (e) {
+      print('Erro ao procurar mensagens: $e');
+      return [];
+    }
+  }
 }

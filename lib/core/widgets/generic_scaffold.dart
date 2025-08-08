@@ -6,15 +6,16 @@ class GenericScaffold extends StatelessWidget {
   final Widget? leading;
   final Widget body;
   final List<Widget>? actions;
+  final Widget? titleWidget;
 
-  const GenericScaffold({
-    super.key,
-    this.leading,
-    required this.title,
-    this.subtitle,
-    required this.body,
-    this.actions,
-  });
+  const GenericScaffold(
+      {super.key,
+      this.leading,
+      required this.title,
+      this.subtitle,
+      required this.body,
+      this.actions,
+      this.titleWidget});
 
   @override
   Widget build(BuildContext context) {
@@ -24,21 +25,22 @@ class GenericScaffold extends StatelessWidget {
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Theme.of(context).colorScheme.onPrimary,
         leading: leading,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Text(
-              title,
-              style: Theme.of(context).textTheme.headlineMedium,
+        title: titleWidget ??
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                if (subtitle != null)
+                  Text(
+                    subtitle!,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+              ],
             ),
-            if (subtitle != null)
-              Text(
-                subtitle!,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-          ],
-        ),
         actions: actions,
       ),
       body: body,
